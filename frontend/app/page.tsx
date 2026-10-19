@@ -45,9 +45,9 @@ export default function ReconocimientoFacial() {
     
     try {
      const response = await fetch('https://implosion-dried-letter.ngrok-free.dev/predecir', {
-        method: 'POST',
-        body: formData,
-      });
+    method: 'POST',
+    body: formData,
+});
       const data = await response.json();
       
       if (response.ok) {

@@ -44,7 +44,7 @@ export default function ReconocimientoFacial() {
     formData.append('file', imagen);
     
     try {
-      const response = await fetch('http://localhost:5000/predecir', {
+     const response = await fetch('https://implosion-dried-letter.ngrok-free.dev/predecir', {
         method: 'POST',
         body: formData,
       });

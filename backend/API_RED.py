@@ -20,12 +20,19 @@ except Exception as e:
 # 2. Diccionario de Clases (Nombres de las personas)
 # IMPORTANTE: Aquí debes poner los nombres EXACTOS de las carpetas en el mismo orden alfabético 
 # en que estaban en tu Drive durante el entrenamiento.
+# 2. Diccionario de Clases (Nombres de las carpetas principales del dataset)
 clases = [
-    "grupo1_personaA", "grupo1_personaB", 
-    "grupo2_personaA", "grupo2_personaB",
-    # ... agrega las 10 clases en orden alfabético
+    "fotografías_evaluacion1_deep_learning_01",
+    "fotografías_evaluacion1_deep_learning_02",
+    "fotografías_evaluacion1_deep_learning_03",
+    "fotografías_evaluacion1_deep_learning_04",
+    "fotografías_evaluacion1_deep_learning_05",
+    "fotografías_evaluacion1_deep_learning_06",
+    "fotografías_evaluacion1_deep_learning_07",
+    "fotografías_evaluacion1_deep_learning_08",
+    "fotografías_evaluacion1_deep_learning_09",
+    "fotografías_evaluacion1_deep_learning_10"
 ]
-
 @app.route('/predecir', methods=['POST'])
 def predecir():
     if 'file' not in request.files:

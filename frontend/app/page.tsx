@@ -11,15 +11,17 @@ export default function ReconocimientoFacial() {
   const [resultado, setResultado] = useState<{ persona: string; probabilidad: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // ==========================================
-  // DICCIONARIO DE TRADUCCIÓN
-  // ==========================================
-  // Aquí traducimos la etiqueta fea de la carpeta al nombre real y bonito
   const nombresReales: Record<string, string> = {
-    "grupo5_persona01": "Diego Neira",
-    "grupo1_personaA": "Constanza Sánchez",
-    "grupo2_personaB": "Demián González",
-    // NOTA: Añade aquí a todos los demás cuando Demián te pase la lista de carpetas
+    "fotografías_evaluacion1_deep_learning_01": "Sujeto Grupo 1", 
+    "fotografías_evaluacion1_deep_learning_02": "Sujeto Grupo 2",
+    "fotografías_evaluacion1_deep_learning_03": "Sujeto Grupo 3",
+    "fotografías_evaluacion1_deep_learning_04": "Sujeto Grupo 4",
+    "fotografías_evaluacion1_deep_learning_05": "Sujeto Grupo 5",
+    "fotografías_evaluacion1_deep_learning_06": "Sujeto Grupo 6",
+    "fotografías_evaluacion1_deep_learning_07": "Sujeto Grupo 7",
+    "fotografías_evaluacion1_deep_learning_08": "Sujeto Grupo 8",
+    "fotografías_evaluacion1_deep_learning_09": "Sujeto Grupo 9",
+    "fotografías_evaluacion1_deep_learning_10": "Sujeto Grupo 10"
   };
 
   const manejarImagen = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,27 +40,9 @@ export default function ReconocimientoFacial() {
     setError(null);
     setResultado(null);
 
-    // ==========================================
-    // MODO SIMULADOR (Mientras llega el .keras)
-    // ==========================================
-    setTimeout(() => {
-      // Esta es la etiqueta cruda que simulamos que devuelve la API
-      const etiquetaCruda = "grupo5_persona01"; 
-
-      setResultado({
-        // Busca la etiqueta en el diccionario. Si no existe, muestra la etiqueta cruda por defecto
-        persona: nombresReales[etiquetaCruda] || etiquetaCruda, 
-        probabilidad: 98.5
-      });
-      setCargando(false);
-    }, 2500);
-
-    /* 
-    // ==========================================
-    // MODO REAL (Descomentar cuando Demián mande el modelo)
-    // ==========================================
     const formData = new FormData();
     formData.append('file', imagen);
+    
     try {
       const response = await fetch('http://localhost:5000/predecir', {
         method: 'POST',
@@ -69,6 +53,7 @@ export default function ReconocimientoFacial() {
       if (response.ok) {
         const etiquetaDetectada = data.persona_detectada;
         setResultado({ 
+          // Busca la etiqueta en el diccionario. Si no existe, muestra la etiqueta cruda
           persona: nombresReales[etiquetaDetectada] || etiquetaDetectada, 
           probabilidad: data.probabilidad 
         });
@@ -76,11 +61,10 @@ export default function ReconocimientoFacial() {
         setError(data.error || 'Error al analizar la imagen.');
       }
     } catch (err) {
-      setError('Error de conexión. Asegúrate de que Flask esté corriendo.');
+      setError('Error de conexión. Asegúrate de que Flask esté corriendo en el puerto 5000.');
     } finally {
       setCargando(false);
     }
-    */
   };
 
   return (
@@ -111,7 +95,7 @@ export default function ReconocimientoFacial() {
               type="file" 
               accept="image/*" 
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-              style={{ opacity: 0 }} // <- Aquí forzamos que el botón sea invisible
+              style={{ opacity: 0 }} 
               onChange={manejarImagen}
             />
             
@@ -164,7 +148,7 @@ export default function ReconocimientoFacial() {
           )}
         </AnimatePresence>
 
-{/* Tarjeta de Resultado */}
+        {/* Tarjeta de Resultado */}
         <AnimatePresence>
           {resultado && (
             <motion.div 
